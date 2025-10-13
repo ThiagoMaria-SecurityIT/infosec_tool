@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-header">
+    <h1>Encoding (Base64)</h1>
+</div>
+<div class="content-body">
+    <p>
+        Encoding is a public, reversible process that converts data into a standardized text format, like the <strong>Base64</strong> standard used here.
+        <br><br>
+        Its main purpose is **reliable transmission**. Some systems can only handle plain text and might misinterpret special characters or binary data. Encoding translates any data into a safe, universal text format that can be sent without corruption.
+        <br><br>
+        However, it is <strong>not a security feature</strong>. Because the method is a public standard, anyone can take the encoded text to an online tool and decode it instantly. This shows that the original information is not kept private.
+    </p>
+    
+    <form method="POST" action="{{ url_for('encoding_page') }}" autocomplete="off">
+        <div class="form-group">
+            <div class="label-container">
+                <label for="text_to_encode">Enter Text to Encode</label>
+                <button type="button" class="clear-btn" onclick="clearText('text_to_encode')">Clear</button>
+            </div>
+            <textarea id="text_to_encode" name="text_to_encode" rows="4">{{ text_to_encode or '' }}</textarea>
+        </div>
+        <button type="submit" name="action" value="encode">Encode ↓</button>
+    </form>
+
+    <div class="results-container" style="margin-top: 30px; border-top: 2px solid #FF8C00; padding-top: 20px;">
+        <form method="POST" action="{{ url_for('encoding_page') }}" autocomplete="off">
+            <div class="form-group">
+                <div class="label-container">
+                    <label for="text_to_decode">Output / Enter Text to Decode</label>
+                    <button type="button" class="clear-btn" onclick="clearText('text_to_decode')">Clear</button>
+                </div>
+                <textarea id="text_to_decode" name="text_to_decode" rows="4">{{ text_to_decode or '' }}</textarea>
+            </div>
+            <button type="submit" name="action" value="decode">↑ Decode</button>
+            <button type="button" onclick="copyToClipboard('text_to_decode')" class="copy-btn">Copy</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function clearText(elementId) { document.getElementById(elementId).value = ''; }
+function copyToClipboard(elementId) {
+    const textArea = document.getElementById(elementId);
+    textArea.select();
+    navigator.clipboard.writeText(textArea.value).then(() => { alert("Copied!"); });
+}
+</script>
+
+<style>
+.label-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.label-container label { margin-bottom: 0; }
+.clear-btn, .copy-btn { background-color: #34495e; color: #ecf0f1; padding: 5px 10px; font-size: 0.8em; font-weight: bold; border-radius: 5px; cursor: pointer; border: 1px solid #ecf0f1; }
+.clear-btn:hover, .copy-btn:hover { background-color: #4e6a85; }
+.copy-btn { margin-left: 10px; }
+</style>
+{% endblock %}

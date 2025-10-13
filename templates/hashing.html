@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-header">
+    <h1>Hashing (One-Way Protection)</h1>
+</div>
+<div class="content-body">
+    <p>
+        Hashing is a **one-way process** that transforms data of any size into a unique, fixed-size string of text called a "hash".
+        <br><br>
+        Its main purpose is to **verify data integrity**. If even one character in the original data changes, the output hash will be completely different. This is used to check if a file has been tampered with or to securely store passwords.
+        <br><br>
+        Unlike encoding, hashing is **irreversible**. You cannot get the original data back from its hash.
+    </p>
+    
+    <form method="POST" action="{{ url_for('hashing_page') }}" autocomplete="off">
+        <div class="form-group">
+            <label for="inputText">Enter Text to Hash</label>
+            <textarea id="inputText" name="inputText" rows="4">{{ input_text or '' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="algorithm">Select Algorithm</label>
+            <select name="algorithm" id="algorithm" class="custom-select">
+                <option value="sha256" {% if selected_algorithm == 'sha256' %}selected{% endif %}>SHA-256</option>
+                <option value="sha512" {% if selected_algorithm == 'sha512' %}selected{% endif %}>SHA-512</option>
+                <option value="md5" {% if selected_algorithm == 'md5' %}selected{% endif %}>MD5 (for demonstration)</option>
+            </select>
+        </div>
+
+        <div class="developer-note">
+            <p><strong>Note:</strong> While MD5 is included for educational purposes, it is considered cryptographically broken and insecure. It should not be used for security applications like password storage, as "collisions" (different inputs producing the same hash) can be found easily.</p>
+        </div>
+
+        <button type="submit">Generate Hash</button>
+        <a href="{{ url_for('hashing_page') }}" class="clear-link-btn">Clear</a>
+    </form>
+
+    <div class="results-container" style="margin-top: 30px;">
+        <div class="label-container">
+            <h3>Resulting Hash:</h3>
+            {% if result_hash %}
+                <button type="button" onclick="copyToClipboard('resultText')" class="copy-btn">Copy</button>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <textarea id="resultText" readonly rows="3">{{ result_hash }}</textarea>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(elementId) {
+    const textArea = document.getElementById(elementId);
+    textArea.select();
+    navigator.clipboard.writeText(textArea.value).then(() => alert("Copied!"));
+}
+</script>
+
+<style>
+.label-container { display: flex; justify-content: space-between; align-items: center; }
+.copy-btn { background-color: #34495e; color: #ecf0f1; padding: 5px 10px; font-size: 0.8em; font-weight: bold; border-radius: 5px; cursor: pointer; border: 1px solid #ecf0f1; }
+.copy-btn:hover { background-color: #4e6a85; }
+.clear-link-btn { display: inline-block; background-color: #34495e; color: #ecf0f1; padding: 12px 25px; font-size: 1.1em; font-weight: bold; border-radius: 5px; text-decoration: none; margin-left: 10px; vertical-align: bottom; }
+.clear-link-btn:hover { background-color: #4e6a85; }
+.custom-select { width: 100%; padding: 12px; background-color: transparent; border: 2px solid #FF8C00; border-radius: 5px; color: #E0E0E0; font-size: 1em; }
+.custom-select option { background-color: #190D3D; color: #E0E0E0; }
+.developer-note { background-color: #2a1a5c; border-left: 4px solid #FF8C00; padding: 10px 15px; margin: 15px 0; border-radius: 4px; font-size: 0.9em; }
+.developer-note p { margin: 0; line-height: 1.5; }
+</style>
+{% endblock %}

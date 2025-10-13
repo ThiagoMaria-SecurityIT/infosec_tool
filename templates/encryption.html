@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-header">
+    <h1>Encryption (Two-Way Protection)</h1>
+</div>
+<div class="content-body">
+    <p>
+        Encryption is a **secure, two-way process** that converts readable data (plaintext) into unreadable data (ciphertext) using a secret key.
+        <br><br>
+        Its purpose is **confidentiality**. Unlike encoding, the output is meaningless without the correct secret key. This is used to protect sensitive information like messages, financial data, and personal files.
+        <br><br>
+        The process is **reversible only with the secret key**. If you lose the key, the data is lost forever.
+    </p>
+    
+    <form method="POST" action="{{ url_for('encryption_page') }}" autocomplete="off">
+        <div class="form-group">
+            <label for="secret_key">Secret Key</label>
+            <textarea id="secret_key" name="secret_key" rows="2">{{ secret_key or '' }}</textarea>
+        </div>
+        <button type="submit" name="action" value="generate_key">Generate New Key</button>
+        <hr style="border-color: #FF8C00; margin: 20px 0;">
+
+        <div class="form-group">
+            <label for="inputText">Plaintext / Ciphertext</label>
+            <textarea id="inputText" name="inputText" rows="4">{{ input_text or '' }}</textarea>
+        </div>
+        
+        <button type="submit" name="action" value="encrypt">Encrypt ↓</button>
+        <button type="submit" name="action" value="decrypt">↑ Decrypt</button>
+        <a href="{{ url_for('encryption_page') }}" class="clear-link-btn">Clear All</a>
+
+        <div class="results-container" style="margin-top: 30px;">
+            <div class="label-container">
+                <h3>Result:</h3>
+                {% if result_text %}
+                    <button type="button" onclick="copyToClipboard('resultText')" class="copy-btn">Copy</button>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <textarea id="resultText" readonly rows="4">{{ result_text or '' }}</textarea>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+function copyToClipboard(elementId) {
+    const textArea = document.getElementById(elementId);
+    textArea.select();
+    navigator.clipboard.writeText(textArea.value).then(() => alert("Copied!"));
+}
+</script>
+
+<style>
+.label-container { display: flex; justify-content: space-between; align-items: center; }
+.copy-btn, .clear-link-btn { background-color: #34495e; color: #ecf0f1; padding: 5px 10px; font-size: 0.8em; font-weight: bold; border-radius: 5px; cursor: pointer; border: 1px solid #ecf0f1; }
+.copy-btn:hover, .clear-link-btn:hover { background-color: #4e6a85; }
+.clear-link-btn { display: inline-block; padding: 12px 25px; font-size: 1.1em; text-decoration: none; margin-left: 10px; vertical-align: bottom; }
+</style>
+{% endblock %}
