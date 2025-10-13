@@ -33,7 +33,7 @@ This project is a simple, interactive web application built with Flask to demons
     *   [Installation & Setup](#installation--setup)
     *   [Running the Application](#running-the-application)
 5.  [Important Security Note](#important-security-note-about-the-secret-key)
-6.  [AI Transparency](#ai-transparency)
+6.  [AI Transparency](#ai-transparency-text-generated-by-ai)
 7.  [Lessons Learned](#lessons-learned)  
 
 ---
