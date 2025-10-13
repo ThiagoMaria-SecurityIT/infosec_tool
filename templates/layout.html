@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Protection Concepts</title>
+    <title>InfoSec Concepts</title>
+    <!-- The url_for function correctly links our stylesheet from the static folder -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <!-- This is the main container that will hold our two columns -->
+    <!-- This is the main container that holds our two columns -->
     <div class="app-container">
 
         <!-- Left Column: The Sidebar for Navigation -->
@@ -16,29 +17,34 @@
             <div class="sidebar-header">
                 <h2>Concepts</h2>
             </div>
+            <!-- 
+                This navigation list dynamically adds the 'active' class to the link
+                of the current page, based on the 'page' variable passed from Flask.
+            -->
             <ul class="sidebar-nav">
-                <!-- These links will eventually point to our Flask routes -->
-                <li><a href="#">Explanation</a></li>
-                <li><a href="#">Encoding</a></li>
-                <li><a href="#">Hashing</a></li>
-                <li><a href="#">Encryption</a></li>
+                <li><a href="{{ url_for('index') }}" class="{{ 'active' if page == 'explanation' else '' }}">Explanation</a></li>
+                <li><a href="{{ url_for('encoding_page') }}" class="{{ 'active' if page == 'encoding' else '' }}">Encoding</a></li>
+                <li><a href="{{ url_for('hashing_page') }}" class="{{ 'active' if page == 'hashing' else '' }}">Hashing</a></li>
+                <li><a href="{{ url_for('encryption_page') }}" class="{{ 'active' if page == 'encryption' else '' }}">Encryption</a></li>
             </ul>
         </div>
 
-        <!-- Right Column: The Main Content Area -->
+        {#
+			Right Column: The Main Content Area.
+			The {% block content %} is a placeholder that child templates 
+			(like encoding.html, hashing.html, and encryption.html) will fill 
+			with their own specific content.
+		#}
         <div class="main-content">
+            {% block content %}
             <div class="content-header">
                 <h1>Welcome!</h1>
             </div>
             <div class="content-body">
                 <p>Select a concept from the menu on the left to get started.</p>
-                <p>This tool will provide a practical demonstration of Plaintext, Encoding, Hashing, and Encryption.</p>
-				<div class="form-group">
-    <label for="inputText">Your Text</label>
-    <textarea id="inputText" name="inputText"></textarea>
-</div>
-<button type="button">Submit</button>
+                <p>This tool provides a practical demonstration of Plaintext, Encoding, Hashing, and Encryption.</p>
             </div>
+            {% endblock %}
         </div>
 
     </div>
