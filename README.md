@@ -44,52 +44,79 @@ python --version
 
 ### 1. Clone the Repository
 
-First, clone this repository to your local machine (or simply create the project folder).
-
-### 2. Set Up the Project Structure
-
-Organize your project with the following folder structure:
-
+First, clone this repository to your local machine (or simply download or create the project folder manually). Navigate into the project directory:
+```bash
+cd infosec_tool
 ```
-infosec_tool/
-├── app.py              # Main Flask application file
-├── README.md           # This file!
-├── static/
-│   └── style.css       # All CSS styles
-└── templates/
-    └── layout.html     # The base HTML template
+
+### 2. Create and Activate a Virtual Environment
+
+It is highly recommended to use a virtual environment (`venv`) to keep project dependencies isolated.
+
+**On macOS / Linux:**
+```bash
+# Create the virtual environment
+python3 -m venv venv
+
+# Activate it
+source venv/bin/activate
 ```
+
+**On Windows:**
+```bash
+# Create the virtual environment
+python -m venv venv
+
+# Activate it
+venv\Scripts\activate
+```
+Your terminal prompt should now change to indicate that you are in the `venv`.
 
 ### 3. Install Dependencies
 
-This project requires the Flask library. Navigate to the project directory in your terminal and install it using pip:
+With your virtual environment active, install the required libraries using pip.
 
 ```bash
 pip install Flask
 ```
 *(We will add `cryptography` here later when we implement the encryption part.)*
 
-### 4. Run the Application
+### 4. Set Up the Project Structure
 
-With the files in place and dependencies installed, run the Flask application from your terminal:
+Ensure your files are organized in the following structure:
+
+```
+infosec_tool/
+├── venv/                 # The virtual environment folder
+├── app.py                # Main Flask application file
+├── README.md             # This file!
+├── static/
+│   └── style.css         # All CSS styles
+└── templates/
+    └── layout.html       # The base HTML template
+```
+
+### 5. Run the Application
+
+Now, run the Flask application from your terminal:
 
 ```bash
 python app.py
 ```
 
-The application will start in debug mode, which means it will automatically reload whenever you save a file. You will see a message like this:
+The application will start in debug mode. You will see a message like this:
 
 ```
  * Running on http://127.0.0.1:5000/
 ```
 
-### 5. View in Your Browser
+### 6. View in Your Browser
 
-Open your favorite web browser and navigate to the URL provided:
+Open your web browser and navigate to the URL provided:
 
 [**http://127.0.0.1:5000**](http://127.0.0.1:5000 )
 
-You should now see the application running!
+You should now see the application running! To stop the server, press `Ctrl+C` in the terminal. To exit the virtual environment, simply type `deactivate`.
 
 ---
 
