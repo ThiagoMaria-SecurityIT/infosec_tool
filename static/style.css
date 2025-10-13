@@ -1,12 +1,13 @@
-/* Basic styles for the whole page */
+/* --- Global Styles & Variables --- */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     background-color: #121212; /* Near-black background */
     color: #E0E0E0; /* Off-white text for readability */
+    font-size: 16px;
 }
 
-/* The main flex container that creates the two-column layout */
+/* --- Main App Layout --- */
 .app-container {
     display: flex;
     height: 100vh;
@@ -15,6 +16,7 @@ body {
 /* --- Sidebar (Left Column) --- */
 .sidebar {
     width: 260px;
+    flex-shrink: 0; /* Prevents sidebar from shrinking */
     background-color: #190D3D; /* Very dark purple */
     color: #CCCCCC; /* Light grey text */
     padding: 20px;
@@ -47,7 +49,9 @@ body {
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.sidebar-nav li a:hover, .sidebar-nav li a.active {
+/* Style for the currently active page link */
+.sidebar-nav li a.active,
+.sidebar-nav li a:hover {
     background-color: #FF8C00; /* Vibrant orange for hover/active */
     color: #121212; /* Dark text on hover for contrast */
     font-weight: 500;
@@ -55,9 +59,9 @@ body {
 
 /* --- Main Content (Right Column) --- */
 .main-content {
-    flex-grow: 1;
+    flex-grow: 1; /* Allows content to fill remaining space */
     padding: 40px;
-    overflow-y: auto;
+    overflow-y: auto; /* Adds scrollbar if content overflows */
 }
 
 .content-header h1 {
@@ -73,7 +77,7 @@ body {
     line-height: 1.7;
 }
 
-/* --- Form Styles (Inspired by the screenshot) --- */
+/* --- Reusable Form Styles --- */
 .form-group {
     margin-bottom: 20px;
 }
@@ -85,7 +89,9 @@ body {
     color: #CCCCCC;
 }
 
-input[type="text"], textarea {
+/* Style for all textareas and text inputs */
+input[type="text"],
+textarea {
     width: 100%;
     padding: 12px;
     background-color: transparent;
@@ -93,14 +99,16 @@ input[type="text"], textarea {
     border-radius: 5px;
     color: #E0E0E0;
     font-size: 1em;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
 }
 
 textarea {
-    min-height: 120px;
+    min-height: 100px;
     resize: vertical;
 }
 
-button {
+/* Style for all primary action buttons */
+button[type="submit"] {
     background-color: #FF8C00; /* Orange button */
     color: #121212; /* Dark text */
     border: none;
@@ -112,6 +120,71 @@ button {
     transition: background-color 0.3s;
 }
 
-button:hover {
+button[type="submit"]:hover {
     background-color: #FFA500; /* Slightly lighter orange on hover */
+}
+
+/* --- Specific Component Styles --- */
+
+/* Container for labels with buttons (e.g., Clear, Copy) */
+.label-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.label-container label {
+    margin-bottom: 0;
+}
+
+/* Small utility buttons (Copy, Clear in encoding.html) */
+.copy-btn,
+.clear-btn {
+    background-color: #34495e;
+    color: #ecf0f1;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #ecf0f1;
+}
+.copy-btn:hover,
+.clear-btn:hover {
+    background-color: #4e6a85;
+}
+.copy-btn {
+    margin-left: 10px;
+}
+
+/* "Clear" link styled as a button (Hashing, Encryption pages) */
+.clear-link-btn {
+    display: inline-block;
+    background-color: #34495e;
+    color: #ecf0f1;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+.clear-link-btn:hover {
+    background-color: #4e6a85;
+}
+
+/* Dropdown menu on Hashing page */
+.custom-select {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    border: 2px solid #FF8C00;
+    border-radius: 5px;
+    color: #E0E0E0;
+    font-size: 1em;
+}
+.custom-select option {
+    background-color: #190D3D; /* Match sidebar for consistency */
+    color: #E0E0E0;
 }
