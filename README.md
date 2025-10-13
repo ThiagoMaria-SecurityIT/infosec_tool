@@ -4,7 +4,7 @@ This project is a simple, interactive web application built with Flask to demons
 
 The application provides a hands-on way to see the difference between these concepts by allowing users to input their own text and see the output in real-time.
 
-![App Screenshot](https://i.imgur.com/your-screenshot-url.png )
+<img width="1869" height="818" alt="image" src="https://github.com/user-attachments/assets/795b27b0-a47e-4262-9421-a0f372b24fd0" />
 *(We can add a screenshot here later once the app is more complete!)*
 
 ---
