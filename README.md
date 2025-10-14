@@ -127,17 +127,29 @@ python --version
 
 ---
 
-## Important Security Note About the Secret Key
+## Important Security Note: Secret Key & Network Traffic
 
-This application uses a Flask `secret_key` to securely sign the session cookie, which is essential for the Post-Redirect-Get pattern to function.
+This application is designed for educational purposes only. Please be aware of the following security considerations:
 
-In the `app.py` file, the key is hard-coded:
+### 1. Hard-Coded Secret Key
+
+This application uses a Flask `secret_key` to securely sign the session cookie. In the `app.py` file, the key is hard-coded for simplicity:
 ```python
 app.secret_key = 'a_super_secret_key_change_this_later'
 ```
-This is done for simplicity and demonstration purposes only. **This is not secure and should never be done in a production application.**
+**This is not secure and should never be done in a production application.** In a real-world environment, the secret key must be a long, random, and unpredictable string loaded from a secure location, such as an environment variable, not written directly in the code.
 
-In a real-world environment, the secret key must be a long, random, and unpredictable string, and it should be loaded from a secure location, such as an environment variable, not written directly in the code.
+### 2. Unencrypted Network Traffic (No HTTPS)
+
+The standard Flask development server runs over HTTP, not HTTPS. This means that all data sent between your browser and the application—including any text you type, generated keys, and encrypted messages—is transmitted in **plaintext** over your network.
+
+> [!Caution]  
+> **Anyone listening on the network can see all the data being processed.**  
+> **Do not use this tool to encrypt real, sensitive information.**  
+
+Therefore, this tool should only be used for learning and demonstration. **Do not use it to encrypt real, sensitive information.**
+
+
 
 ---
 
